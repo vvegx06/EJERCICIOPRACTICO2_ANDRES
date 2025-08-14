@@ -10,7 +10,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title>Películas</title>
     </head>
     <body>
-        <!-- Botón Agregar (solo ADMIN) -->
         <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
             <div class="container">
                 <div class="row">
@@ -25,7 +24,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </section>
 
-        <!-- Modal Agregar Película -->
         <section th:fragment="agregarPelicula">
             <div id="agregarPelicula" class="modal fade" tabindex="-1" aria-labelledby="agregarPeliculaLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -37,7 +35,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                         <form th:action="@{/pelicula/guardar}" th:object="${pelicula}" method="POST" class="was-validated">
                             <div class="modal-body">
-                                <!-- Id manual (manteniendo tu lógica) -->
                                 <div class="form-group mb-3">
                                     <label for="idPelicula" th:text="#{pelicula.idPelicula}">Id</label>
                                     <input type="number" class="form-control" name="idPelicula"/>
@@ -53,7 +50,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                     <input type="number" step="0.01" min="0" class="form-control" name="precio" required="true"/>
                                 </div>
 
-                                <!-- Categoría -->
                                 <div class="form-group mb-3">
                                     <label for="categoria" th:text="#{categoria.titulo}">Categoría</label>
                                     <select class="form-select" name="categoria.idCategoria" required="true">
@@ -78,7 +74,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </section>
 
-        <!-- Listado de Películas -->
         <section th:fragment="listadoPeliculas" id="peliculas">
             <div class="container">
                 <div class="row">
@@ -119,7 +114,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
                                                 </a>
                                             </td>
-                                            <!-- Agregar al carrito -->
                                             <td>
                                                 <a th:href="@{/carrito/agregar/{idPelicula}(idPelicula=${pelicula.idPelicula})}"
                                                    class="btn btn-warning">
@@ -151,7 +145,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </section>
 
-        <!-- Editar Película -->
         <section th:fragment="editarPelicula">
             <form method="POST"
                   th:action="@{/pelicula/guardar}"
@@ -160,7 +153,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                 <input type="hidden" name="idPelicula" th:field="*{idPelicula}"/>
 
-                <!-- Reusar botones de edición -->
                 <section th:replace="~{pelicula/fragmentos :: botonesEditar}"></section>
 
                 <div id="details">
@@ -201,7 +193,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </form>
         </section>
 
-        <!-- Botones Editar -->
         <section th:fragment="botonesEditar">
             <div id="actions" class="py-4 mb-4 bg-light">
                 <div class="container">

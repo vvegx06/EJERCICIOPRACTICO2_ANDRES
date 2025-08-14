@@ -7,7 +7,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       xmlns:th="http://www.thymeleaf.org">
   <body>
 
-    <!-- Mini resumen del carrito (lo usa /carrito/agregar/{idPelicula}) -->
     <div th:fragment="verCarrito" th:unless="${#lists.isEmpty(listaItems)}">
       <form th:action="@{/carrito/listado}" method="get">
         <button type="submit" class="btn btn-primary">
@@ -17,7 +16,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       </form>
     </div>
 
-    <!-- LISTADO DEL CARRITO -->
     <section th:fragment="listadoCarrito" id="items">
       <div class="container">
         <div class="row">

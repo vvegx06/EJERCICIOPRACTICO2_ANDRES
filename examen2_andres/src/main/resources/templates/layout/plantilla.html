@@ -12,11 +12,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <!-- Bootstrap / FontAwesome -->
     <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
 
-    <!-- Tu CSS -->
     <link th:href="@{/css/estilos.css}" rel="stylesheet"/>
 
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -31,10 +29,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <nav class="navbar navbar-expand-sm navbar-dark" style="background: linear-gradient(90deg, #0d6efd, #6610f2); padding: 0.5rem 1rem; border-radius: 0 0 15px 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: fixed; top:0; width:100%; z-index: 1000;">
         <div class="container">
 
-            <!-- Marca -->
             <a th:href="@{/}" class="navbar-brand fw-bold" style="font-size: 1.5rem; color: #fff;">Películas</a>
 
-            <!-- Título centrado -->
             <div class="navbar-text mx-auto fw-semibold text-white d-none d-sm-block" style="font-style: italic;">
                 <i class="fas fa-film me-1"></i>
                 Caso de
@@ -44,7 +40,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <span sec:authorize="isAnonymous()">Andres</span>
             </div>
 
-            <!-- Botón hamburguesa -->
             <button class="navbar-toggler border-0" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
@@ -52,7 +47,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Menú derecho -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item px-2">
@@ -76,7 +70,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </form>
                     </li>
 
-                    <!-- Autenticado: nombre + Logout -->
                     <li class="nav-item px-2 d-flex align-items-center text-white" sec:authorize="isAuthenticated()">
                         <i class="fas fa-user-check me-1"></i>
                         <span class="me-2" sec:authentication="name">Felipe</span>

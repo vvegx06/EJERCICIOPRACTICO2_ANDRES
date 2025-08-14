@@ -44,7 +44,6 @@ public class Configuracion implements WebMvcConfigurer {
         registro.addInterceptor(localeChanceInterceptor());
     }
 
-    // Messages.properties
     @Bean("messageSource")
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource= new ResourceBundleMessageSource();
@@ -64,7 +63,6 @@ public class Configuracion implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                // ===== Público =====
                 .requestMatchers(
                     "/", "/index",
                     "/registro/**",
@@ -75,7 +73,6 @@ public class Configuracion implements WebMvcConfigurer {
                     "/pelicula/listado"
                 ).permitAll()
 
-                // ===== ADMIN: gestiona catálogos =====
                 .requestMatchers(
                     "/pelicula/nuevo","/pelicula/guardar",
                     "/pelicula/modificar/**","/pelicula/eliminar/**",
@@ -86,19 +83,15 @@ public class Configuracion implements WebMvcConfigurer {
                     "/reportes/**"
                 ).hasRole("ADMIN")
 
-                // ===== Listados internos (si los usas) =====
                 .requestMatchers("/categoria/listado","/usuario/listado")
                     .hasAnyRole("ADMIN","USER")
 
-                // ===== Facturación (USER y también ADMIN) =====
                 .requestMatchers("/factura/**","/venta/**")
                     .hasAnyRole("USER","ADMIN")
 
-                // ===== Checkout del carrito =====
                 .requestMatchers("/facturar/carrito")
                     .hasRole("USER")
 
-                // Cualquier otra ruta requiere autenticación
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
