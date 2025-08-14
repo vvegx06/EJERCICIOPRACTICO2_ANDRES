@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head th:replace="~{layout/plantilla :: head}">
+    <title>TechShop</title>
+  </head>
+  <body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+
+    <main class="py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <h2 class="text-center mb-4">Pelicula Recomendada</h2>
+
+            <!-- IFRAME centrado y responsivo (Bootstrap 5) -->
+            <div class="ratio ratio-16x9 shadow rounded-4 overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/aqz-KE-bpKQ"
+                title="Video destacado"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+  </body>
+</html>
