@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cine - Películas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://images.unsplash.com/photo-1517602302552-471fe67acf66') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .navbar, .footer {
+            background-color: rgba(0,0,0,0.8);
+        }
+        .card {
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+        }
+        .table {
+            background-color: rgba(0,0,0,0.6);
+        }
+        .btn-primary {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header / Navbar -->
+<nav class="navbar navbar-dark">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">🎬 Cine</span>
+        <a href="/" class="btn btn-outline-light">Volver al Home</a>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container my-5">
+    <div class="card shadow p-4">
+        <h1 class="mb-4 text-center">Lista de Películas</h1>
+
+        <!-- Tabla de películas -->
+        <table class="table table-hover text-white">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Duración</th>
+                    <th>Fecha Estreno</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pelicula : ${peliculas}">
+                    <td th:text="${pelicula.titulo}"></td>
+                    <td th:text="${pelicula.descripcion}"></td>
+                    <td th:text="${pelicula.duracion}"></td>
+                    <td th:text="${pelicula.fechaEstreno}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Formulario para agregar película -->
+        <form th:action="@{/peliculas/add}" method="post" class="mt-4">
+            <div class="mb-3">
+                <input type="text" name="titulo" class="form-control" placeholder="Título" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" name="descripcion" class="form-control" placeholder="Descripción" required>
+            </div>
+            <div class="mb-3">
+                <input type="number" name="duracion" class="form-control" placeholder="Duración (min)" required>
+            </div>
+            <div class="mb-3">
+                <input type="date" name="fechaEstreno" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Película</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer text-center py-3 mt-5 text-white">
+    2025
+</footer>
+
+</body>
+</html>
