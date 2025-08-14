@@ -1,0 +1,61 @@
+CREATE DATABASE cine_teatro;
+
+USE cine_teatro;
+
+-- Tabla de Usuarios
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('ADMIN', 'USER') NOT NULL
+);
+
+-- Tabla de Películas
+CREATE TABLE peliculas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    duracion INT NOT NULL, -- Duración en minutos
+    fecha_estreno DATE
+);
+
+-- Tabla de Funciones
+CREATE TABLE funciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pelicula_id INT NOT NULL,
+    horario TIME NOT NULL,
+    FOREIGN KEY (pelicula_id) REFERENCES peliculas(id)
+);
+
+-- Tabla de Reservas
+CREATE TABLE reservas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    funcion_id INT NOT NULL,
+    cantidad_asientos INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (funcion_id) REFERENCES funciones(id)
+);
+
+-- Insertar usuarios de ejemplo (sin encriptar)
+INSERT INTO usuarios (username, password, role) VALUES
+('admin', 'admin', 'ADMIN'),  -- Usuario admin
+('user', 'user', 'USER');      -- Usuario user
+
+-- Insertar películas de ejemplo
+INSERT INTO peliculas (titulo, descripcion, duracion, fecha_estreno) VALUES
+('El Gran Show', 'Una comedia sobre la vida en el escenario.', 120, '2023-01-15'),
+('La Aventura Espacial', 'Una emocionante aventura en el espacio.', 150, '2023-02-20'),
+('El Viaje de los Sueños', 'Un drama conmovedor sobre la superación personal.', 90, '2023-03-10');
+
+-- Insertar funciones de ejemplo
+INSERT INTO funciones (pelicula_id, horario) VALUES
+(1, '18:00:00'),
+(1, '20:30:00'),
+(2, '19:00:00'),
+(3, '21:00:00');
+
+
+CREATE USER 'cine_user'@'localhost' IDENTIFIED BY 'tu_nueva_contraseña';
+GRANT ALL PRIVILEGES ON cine_teatro.* TO 'cine_user'@'localhost';
+FLUSH PRIVILEGES;
