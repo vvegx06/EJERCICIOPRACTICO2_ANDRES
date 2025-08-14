@@ -7,107 +7,117 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-    <head th:fragment="head">
-        <title>Caso2 - Andres</title>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<head th:fragment="head">
+    <title>Caso2 - Andres</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <!-- Bootstrap / FontAwesome -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
 
+    <!-- Tu CSS -->
+    <link th:href="@{/css/estilos.css}" rel="stylesheet"/>
 
-        <!-- Bootstrap / FontAwesome -->
-        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/rutinas.js}"></script>
+</head>
 
-        <!-- Tu CSS (si lo usas) -->
-        <link th:href="@{/css/estilos.css}" rel="stylesheet"/>
+<body style="background: #f8f9fa; display: flex; flex-direction: column; min-height: 100vh;">
 
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-        <script th:src="@{/js/rutinas.js}"></script>
-    </head>
+<header th:fragment="header" class="header">
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background: linear-gradient(90deg, #0d6efd, #6610f2); padding: 0.5rem 1rem; border-radius: 0 0 15px 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: fixed; top:0; width:100%; z-index: 1000;">
+        <div class="container">
 
-    <body>
-        <header th:fragment="header" class="header">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
-                <div class="container">
+            <!-- Marca -->
+            <a th:href="@{/}" class="navbar-brand fw-bold" style="font-size: 1.5rem; color: #fff;">Películas</a>
 
-                    <!-- Marca a la izquierda -->
-                    <a th:href="@{/}" class="navbar-brand">Peliculas</a>
-
-                    <!-- Título centrado en el navbar -->
-                    <div class="navbar-text mx-auto fw-semibold text-light d-none d-sm-block">
-                        <i class="fas fa-cog me-1"></i>
-                        Caso de
-                        <span sec:authorize="isAuthenticated()">
-                            <span sec:authentication="name">Andres</span>
-                        </span>
-                        <span sec:authorize="isAnonymous()">Andres</span>
-                    </div>
-
-                    <!-- Botón hamburguesa -->
-                    <button class="navbar-toggler" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div id="resultsBlock" class="me-3"></div>
-
-                    <!-- Menú derecho -->
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item px-2">
-                                <a class="nav-link" th:href="@{/pelicula/listado}"
-                                   th:text="#{plantilla.peliculas}">Películas</a>
-                            </li>
-
-                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
-                                <a class="nav-link" th:href="@{/usuario/listado}"
-                                   th:text="#{plantilla.usuarios}">Usuarios</a>
-                            </li>
-
-                            <li class="nav-item px-2">
-                                <a class="nav-link" th:href="@{/contact}"
-                                   th:text="#{plantilla.contacto}">Contacto</a>
-                            </li>
-
-
-                            <!-- Anónimo: botón Login -->
-                            <li class="nav-item px-2" sec:authorize="isAnonymous()">
-                                <form method="post" th:action="@{/login}" class="m-0">
-                                    <a href="#" class="nav-link" onclick="this.closest('form').submit(); return false;">
-                                        <i class="fas fa-user-clock me-1"></i> [[#{login.login}]]
-                                    </a>
-                                </form>
-                            </li>
-
-                            <!-- Autenticado: nombre + Logout -->
-                            <li class="nav-item px-2 d-flex align-items-center text-light" sec:authorize="isAuthenticated()">
-                                <i class="fas fa-user-check me-1"></i>
-                                <span class="me-2" sec:authentication="name">Felipe</span>
-                                <form method="post" th:action="@{/logout}" class="m-0">
-                                    <button type="submit" class="btn btn-link nav-link p-0">
-                                        <i class="fas fa-sign-out-alt me-1"></i> [[#{login.logout}]]
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <!-- SIN segundo header para evitar duplicado -->
-
-        <footer th:fragment="footer" class="bg-dark text-white mt-5 p-2">
-            <div class="container">
-                <p class="lead text-center m-0">
-                    &copy; [[#{plantilla.derechos}]]
-                    <a class="text-decoration-none ms-2" th:href="@{/(lang=es)}">ES</a> |
-                    <a class="text-decoration-none" th:href="@{/(lang=en)}">EN</a>
-                </p>
+            <!-- Título centrado -->
+            <div class="navbar-text mx-auto fw-semibold text-white d-none d-sm-block" style="font-style: italic;">
+                <i class="fas fa-film me-1"></i>
+                Caso de
+                <span sec:authorize="isAuthenticated()">
+                    <span sec:authentication="name">Andres</span>
+                </span>
+                <span sec:authorize="isAnonymous()">Andres</span>
             </div>
-        </footer>
-    </body>
 
+            <!-- Botón hamburguesa -->
+            <button class="navbar-toggler border-0" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"
+                    style="background-color: rgba(255,255,255,0.2);">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menú derecho -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item px-2">
+                        <a class="nav-link text-white rounded" th:href="@{/pelicula/listado}" style="transition: 0.3s;" onmouseover="this.style.backgroundColor='#495057'" onmouseout="this.style.backgroundColor='transparent'">Películas</a>
+                    </li>
+
+                    <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a class="nav-link text-white rounded" th:href="@{/usuario/listado}" style="transition: 0.3s;" onmouseover="this.style.backgroundColor='#495057'" onmouseout="this.style.backgroundColor='transparent'">Usuarios</a>
+                    </li>
+
+                    <li class="nav-item px-2">
+                        <a class="nav-link text-white rounded" th:href="@{/contact}" style="transition: 0.3s;" onmouseover="this.style.backgroundColor='#495057'" onmouseout="this.style.backgroundColor='transparent'">Contacto</a>
+                    </li>
+
+                    <!-- Anónimo: botón Login -->
+                    <li class="nav-item px-2" sec:authorize="isAnonymous()">
+                        <form method="post" th:action="@{/login}" class="m-0">
+                            <a href="#" class="nav-link text-white rounded" onclick="this.closest('form').submit(); return false;" style="transition: 0.3s;" onmouseover="this.style.backgroundColor='#495057'" onmouseout="this.style.backgroundColor='transparent'">
+                                <i class="fas fa-user-clock me-1"></i> [[#{login.login}]]
+                            </a>
+                        </form>
+                    </li>
+
+                    <!-- Autenticado: nombre + Logout -->
+                    <li class="nav-item px-2 d-flex align-items-center text-white" sec:authorize="isAuthenticated()">
+                        <i class="fas fa-user-check me-1"></i>
+                        <span class="me-2" sec:authentication="name">Felipe</span>
+                        <form method="post" th:action="@{/logout}" class="m-0">
+                            <button type="submit" class="btn btn-outline-light btn-sm rounded">
+                                <i class="fas fa-sign-out-alt me-1"></i> [[#{login.logout}]]
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="d-flex flex-grow-1 align-items-center justify-content-center" style="padding-top: 120px;">
+    <div class="text-center w-100" style="max-width: 800px;">
+        <h2 class="mb-4 fw-bold">Película Recomendada</h2>
+
+        <!-- IFRAME centrado y responsivo -->
+        <div class="ratio ratio-16x9 shadow rounded-4 overflow-hidden mx-auto">
+            <iframe
+                    src="https://www.youtube.com/embed/eMzejXYKT_Y"
+                    title="Video destacado"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+        </div>
+    </div>
+</main>
+
+<footer th:fragment="footer" class="p-3 mt-4 text-white" style="border-top-left-radius: 15px; border-top-right-radius: 15px; background: linear-gradient(90deg,#6610f2,#0d6efd); text-align:center;">
+    <div class="container">
+        <p class="m-0 small">
+            &copy; 
+            <a class="text-decoration-none text-white ms-2" th:href="@{/(lang=es)}">ES</a> |
+            <a class="text-decoration-none text-white" th:href="@{/(lang=en)}">EN</a>
+        </p>
+    </div>
+</footer>
+
+</body>
 </html>
