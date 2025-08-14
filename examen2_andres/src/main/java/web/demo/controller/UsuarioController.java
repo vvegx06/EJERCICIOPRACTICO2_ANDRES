@@ -15,20 +15,20 @@ import web.demo.domain.Usuario;
 import web.demo.service.UsuarioService;
 
 
-@Controller // Asigna que va a ser un controller
-@RequestMapping("/usuario") // Asigna que va a ser un controller
+@Controller 
+@RequestMapping("/usuario") 
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService usuarioService; // Inyeccion de Usuario Service
+    private UsuarioService usuarioService; 
 
 
     @GetMapping("/listado")
     public String listado(Model model) {
-        var usuarios = usuarioService.getUsuarios(); // Obtiene lista de usuarios
-        model.addAttribute("usuarios", usuarios);    // La pasa a la vista
-        model.addAttribute("totalUsuarios", usuarios.size()); // También la cantidad
-        return "/usuario/listado"; // Returna la pagina de listado 
+        var usuarios = usuarioService.getUsuarios(); 
+        model.addAttribute("usuarios", usuarios);    
+        model.addAttribute("totalUsuarios", usuarios.size()); 
+        return "/usuario/listado";  
     }
 
     @GetMapping("/nuevo")
